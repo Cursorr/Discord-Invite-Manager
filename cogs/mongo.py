@@ -15,7 +15,11 @@ class Mongo(commands.Cog):
         self.bot = bot
         self.db = motor.AsyncIOMotorClient()["invite_manager"]
 
-    async def get_user_data(self, user_id, guild_id):
+    async def get_user_data(self, guild_id, user_id=None):
+        # If user paramter not passed, we will fetcha all documents from that guild
+        if not user_id:
+            return self.db["invites"].find({"guild_id": guild_id})
+        
         data = await self.db["invites"].find_one(
             {"user_id": user_id, "guild_id": guild_id})
 
