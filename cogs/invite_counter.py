@@ -29,8 +29,6 @@ class InviteCounter(commands.Cog):
             except Exception as exception:
                 print(exception)
 
-            print(self.bot.invites)
-
     # Adding a guild into the cache if bot joins it
     @commands.Cog.listener()
     async def on_guild_join(self, guild: discord.Guild):
@@ -105,7 +103,7 @@ class InviteCounter(commands.Cog):
         if member.bot:
             return
 
-        member_data = await self.bot.mongo.get_user_data(member.id, guild.id)
+        member_data = await self.bot.mongo.get_user_data(guild.id, member.id)
         
         # If inviter registered, removing one invite and adding one leave
         if "inviter_id" in member_data:
