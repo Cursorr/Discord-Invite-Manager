@@ -1,0 +1,2 @@
+discord.py @ git+https://github.com/StockerMC/discord.py@master
+motor==2.5.1
